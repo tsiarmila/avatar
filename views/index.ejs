@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avatar Creator</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <canvas id="avatarCanvas" width="200" height="200" style="border-radius: 50%"></canvas>
+        <div>
+            <label for="hairColorSelect">Choose hair color:</label>
+            <select id="hairColorSelect">
+                <option value="#f4a460">Light</option>
+                <option value="#613615">Dark</option>
+                <!-- Добавьте другие варианты цветов волос при необходимости -->
+            </select>
+        </div>
+
+        <div>
+            <label for="hairLengthSelect">Choose hair length:</label>
+            <select id="hairLengthSelect">
+                <option value="short">Short</option>
+                <option value="long">Long</option>
+            </select>
+        </div>
+        <button id="generateBtn">Generate Avatar</button>
+        <button id="saveBtn">Save Avatar</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
