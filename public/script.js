@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const generateBtn = document.getElementById('generateBtn');
     const hairColorSelect = document.getElementById('hairColorSelect');
     const hairLengthSelect = document.getElementById('hairLengthSelect');
+    const hairFormSelect = document.getElementById('hairFormSelect');
+    const clothesColorSelect = document.getElementById('clothesColorSelect');
     const saveBtn = document.getElementById('saveBtn');
 
     function generateAvatar(ctx) {
@@ -15,22 +17,40 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         const hairColor = hairColorSelect.value;
-        const hairLength = hairLengthSelect.value;
+        let hairLength = hairLengthSelect.value;
+        const hairForm = hairFormSelect.value;
+        const clothesColor = clothesColorSelect.value;
 
+        if (hairForm === "curly") {
+            hairLengthSelect.value = "short";
+            hairLength = "short";
+        }
+        if (hairForm === "wavy") {
+            hairLengthSelect.value = "long";
+            hairLength = "long";
+        }
+
+        drawClothes(ctx, clothesColor);
         drawFace(ctx);
-
         drawHair(ctx, hairColor);
 
-        // Draw hair based on selected length
-        if (hairLength === 'long') {
+        if (hairLength === 'long' && hairForm === 'straight') {
             drawLongHair(ctx, hairColor);
         }
+        if (hairLength === 'short' && hairForm === 'curly') {
+            drawHairSwirls(hairColor);
+        }
+        if (hairLength === 'long' && hairForm === 'wavy') {
+            drawWavyHair(ctx, hairColor);
+        }
+
+
+
     }
 
-    function drawFace(ctx) {
-
+    function drawClothes(ctx, clothesColor) {
       // Draw clothes
-      ctx.fillStyle = 'blue';
+      ctx.fillStyle = clothesColor;
       ctx.beginPath();
       ctx.arc(100, 205, 60, 1.7 * Math.PI, 1.3 * Math.PI);
       ctx.fill();
@@ -40,6 +60,9 @@ document.addEventListener('DOMContentLoaded', function() {
       ctx.lineWidth = 5;
       ctx.fillStyle = '#ebe4df';
       ctx.fill();
+    }
+
+    function drawFace(ctx) {
 
       // Draw neck
       ctx.fillStyle = '#deb392';
@@ -96,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
       ctx.stroke();
 
       // Draw dimples
-      ctx.fillStyle = '#ab9585';
+      ctx.fillStyle = 'black';
       ctx.beginPath();
       ctx.arc(50, 125, 2, 0, 2 * Math.PI); // Параметры: центр (100, 100), радиус 2
       ctx.fill();
@@ -165,6 +188,120 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.quadraticCurveTo(165, 145, 180, 100);
         ctx.fill();
     }
+
+    function drawHairSwirl(x, y, length, angle, swirlColor) {
+      ctx.strokeStyle = swirlColor;
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+
+      var STEPS_PER_ROTATION = 60;
+      var increment = 2 * Math.PI / STEPS_PER_ROTATION;
+      var theta = angle;
+
+      while (theta < 15) {
+        var newX = x + theta * Math.cos(theta);
+        var newY = y + theta * Math.sin(theta);
+        ctx.lineTo(newX, newY);
+        theta += increment;
+      }
+
+      ctx.stroke();
+    };
+    var swirls = [
+        { x: 28, y: 80 },
+        { x: 32, y: 42 },
+        { x: 60, y: 25 },
+        { x: 65, y: 70 },
+        { x: 80, y: 40 },
+        { x: 98, y: 60 },
+        { x: 100, y: 20 },
+        { x: 120, y: 25 },
+        { x: 120, y: 50 },
+        { x: 145, y: 25 },
+        { x: 150, y: 65 },
+        { x: 170, y: 75 },
+        { x: 172, y: 50 },
+    ];
+
+    function drawHairSwirls(hairColor) { // Принимаем цвет волос в качестве аргумента
+        swirls.forEach(function(swirl) {
+            var length = Math.random() * 50 + 20; // Длина завитушки будет варьироваться от 20 до 70 пикселей
+            var angle = Math.random() * Math.PI * 2; // Начальный угол завитушки
+            var swirlColor;
+
+            switch (hairColor) {
+                case 'light':
+                    swirlColor = '#b86b30';
+                    // break;
+                case 'dark':
+                    swirlColor = '#614d3d';
+                    // break;
+                case 'black':
+                    swirlColor = 'brown';
+                    // break;
+                default:
+                    swirlColor = '#614d3d'; // Если цвет волос не определен, используем коричневый цвет для завитушек
+            }
+            drawHairSwirl(swirl.x, swirl.y, length, angle, swirlColor);
+        });
+    };
+
+    function drawWavyHair(ctx, hairColor) {
+    // Рисуем горизонтальную синусоиду
+    // var startX1 = 120;
+    // var startY1 = 60;
+    // var amplitude1 = 5;
+    // var frequency1 = 0.5;
+    // var step1 = 0.1;
+    //
+    // ctx.beginPath();
+    // ctx.moveTo(startX1, startY1);
+    // for (var x1 = startX1; x1 <= canvas.width; x1 += step1) {
+    //     var y1 = amplitude1 * Math.sin(frequency1 * (x1 - startX1));
+    //     ctx.lineTo(x1, y1 + startY1);
+    // }
+    // ctx.strokeStyle = 'black';
+    // ctx.lineWidth = 3;
+    // ctx.stroke();
+
+    // Рисуем вертикальную синусоиду
+    // var startX2 = 120;
+    // var startY2 = 60;
+    // var amplitude2 = 5;
+    // var frequency2 = 0.5;
+    // var step2 = 0.1;
+    //
+    // ctx.beginPath();
+    // ctx.moveTo(startX2, startY2);
+    // for (var y2 = startY2; y2 <= canvas.height; y2 += step2) {
+    //     var x2 = amplitude2 * Math.sin(frequency2 * (y2 - startY2));
+    //     ctx.lineTo(x2 + startX2, y2);
+    // }
+    // ctx.strokeStyle = 'blue'; // Измените цвет для вертикальной синусоиды
+    // ctx.lineWidth = 3;
+    // ctx.stroke();
+
+    // Рисуем диагональную синусоиду
+    var startX2 = 120;
+var startY2 = 60;
+var amplitude2 = 5;
+var frequency2 = 0.5;
+var step2 = 0.1;
+
+ctx.beginPath();
+ctx.moveTo(startX2, startY2);
+for (var y2 = startY2; y2 <= canvas.height; y2 += step2) {
+    var x2 = amplitude2 * Math.cos(frequency2 * (y2 - startY2));
+    ctx.lineTo(x2 + startX2, y2);
+}
+ctx.strokeStyle = 'blue';
+ctx.lineWidth = 3;
+ctx.stroke();
+
+};
+
+
+
 
     function saveAvatar() {
       const link = document.createElement('a');

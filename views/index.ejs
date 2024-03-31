@@ -4,30 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avatar Creator</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sacramento&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
+      <h1>Self-portrait</h1>
         <canvas id="avatarCanvas" width="200" height="200" style="border-radius: 50%"></canvas>
-        <div>
-            <label for="hairColorSelect">Choose hair color:</label>
+        <div class="choose-container">
+            <label for="hairColorSelect">Hair Color:</label>
             <select id="hairColorSelect">
                 <option value="#f4a460">Light</option>
-                <option value="#613615">Dark</option>
+                <option value="#8f715a">Dark</option>
+                <option value="#000000">Black</option>
                 <!-- Добавьте другие варианты цветов волос при необходимости -->
             </select>
         </div>
 
-        <div>
-            <label for="hairLengthSelect">Choose hair length:</label>
+        <div class="choose-container">
+            <label for="hairLengthSelect">Hair Length:</label>
             <select id="hairLengthSelect">
-                <option value="short">Short</option>
                 <option value="long">Long</option>
+                <option value="short">Short</option>
             </select>
         </div>
-        <button id="generateBtn">Generate Avatar</button>
-        <button id="saveBtn">Save Avatar</button>
+
+        <div class="choose-container">
+            <label for="hairFormSelect">Hair Form:</label>
+            <select id="hairFormSelect">
+                <!-- <option value="wavy">Wavy</option> -->
+                <option value="curly">Curly</option>
+                <option value="straight">Straight</option>
+            </select>
+        </div>
+
+        <div class="choose-container">
+            <label for="clothesColorSelect">Shirt Color:</label>
+            <select id="clothesColorSelect">
+              <option value="blue">Blue</option>
+              <option value="pink">Pink</option>
+              <option value="red">Red</option>
+              <option value="green">Green</option>
+              <option value="yellow">Yellow</option>
+            </select>
+        </div>
+        <button id="generateBtn">GENERATE</button>
+        <button id="saveBtn">SAVE Avatar</button>
     </div>
+    <footer>With  💖 Mila</footer>
     <script src="script.js"></script>
+    <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="milatsiar" data-description="Support me on Buy me a coffee!" data-message="Buy Me A Coffee!" data-color="#5F7FFF" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
 </body>
 </html>

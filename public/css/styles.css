@@ -1,29 +1,77 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Montserrat", sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
 }
-
-.container {
-    text-align: center;
+h1 {
+  font-family: "Sacramento", cursive;
+  font-size: 50px;
+  margin: 0;
 }
 
+.container {
+  /* max-width: 500px; */
+  margin: 20px auto 50px auto;
+  padding: 40px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+    background-color: #c7e1fc;
+    background-image: linear-gradient(#c7e1fc, white);
+}
+.choose-container {
+  display: flex;
+  margin: 10px auto;
+}
 canvas {
     border: 1px solid #ccc;
+    margin: 10px 50px;
+}
+
+label {
+  text-align: left;
+  padding-top: 10px;
+  flex-grow: 1; /* Расширяем текст задачи на всё доступное пространство */
+}
+
+select {
+  width: calc(40% - 10px);
+  padding: 10px;
+  font-family: "Montserrat", sans-serif;
+}
+option {
+  font-size: 15px;
+  font-family: "Montserrat", sans-serif;
+
 }
 
 button {
-    margin-top: 10px;
+  width: 50%;
+    margin: 10px auto;
     padding: 8px 16px;
     background-color: #007bff;
     color: #fff;
     border: none;
+    border-radius: 5px;
+  padding: 10px 20px;
     cursor: pointer;
 }
 
 button:active {
     background-color: #0056b3;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #f0f0f0; /* Цвет фона */
+  color: #0056b3; /* Цвет текста */
+  padding: 17px; /* Внутренний отступ */
+  text-align: center; /* Выравнивание текста по центру */
+    font-family: "Sacramento", cursive;
+    font-size: 30px;
 }
