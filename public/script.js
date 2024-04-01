@@ -208,17 +208,17 @@ document.addEventListener('DOMContentLoaded', function() {
       ctx.stroke();
     };
     var swirls = [
-        { x: 28, y: 80 },
-        { x: 32, y: 42 },
+        { x: 28, y: 68 },
+        { x: 35, y: 42 },
         { x: 60, y: 25 },
-        { x: 65, y: 70 },
+        { x: 65, y: 65 },
         { x: 80, y: 40 },
         { x: 98, y: 60 },
         { x: 100, y: 20 },
         { x: 120, y: 25 },
         { x: 120, y: 50 },
         { x: 145, y: 25 },
-        { x: 150, y: 65 },
+        { x: 150, y: 60 },
         { x: 170, y: 75 },
         { x: 172, y: 50 },
     ];
@@ -265,38 +265,38 @@ document.addEventListener('DOMContentLoaded', function() {
     // ctx.stroke();
 
     // Рисуем вертикальную синусоиду
-    // var startX2 = 120;
-    // var startY2 = 60;
-    // var amplitude2 = 5;
-    // var frequency2 = 0.5;
-    // var step2 = 0.1;
-    //
-    // ctx.beginPath();
-    // ctx.moveTo(startX2, startY2);
-    // for (var y2 = startY2; y2 <= canvas.height; y2 += step2) {
-    //     var x2 = amplitude2 * Math.sin(frequency2 * (y2 - startY2));
-    //     ctx.lineTo(x2 + startX2, y2);
-    // }
-    // ctx.strokeStyle = 'blue'; // Измените цвет для вертикальной синусоиды
-    // ctx.lineWidth = 3;
-    // ctx.stroke();
+    var startX2 = 120;
+    var startY2 = 60;
+    var amplitude2 = 5;
+    var frequency2 = 0.5;
+    var step2 = 0.1;
+
+    ctx.beginPath();
+    ctx.moveTo(startX2, startY2);
+    for (var y2 = startY2; y2 <= 80; y2 += step2) {
+        var x2 = amplitude2 * Math.sin(frequency2 * (y2 - startY2));
+        ctx.lineTo(x2 + startX2, y2);
+    }
+    ctx.strokeStyle = 'blue'; // Измените цвет для вертикальной синусоиды
+    ctx.lineWidth = 3;
+    ctx.stroke();
 
     // Рисуем диагональную синусоиду
-    var startX2 = 120;
-var startY2 = 60;
-var amplitude2 = 5;
-var frequency2 = 0.5;
-var step2 = 0.1;
+    var startX3 = 120;
+    var startY3 = 60;
+    var amplitude3 = 5;
+    var frequency3 = 0.5;
+    var step3 = 1;
 
-ctx.beginPath();
-ctx.moveTo(startX2, startY2);
-for (var y2 = startY2; y2 <= canvas.height; y2 += step2) {
-    var x2 = amplitude2 * Math.cos(frequency2 * (y2 - startY2));
-    ctx.lineTo(x2 + startX2, y2);
-}
-ctx.strokeStyle = 'blue';
-ctx.lineWidth = 3;
-ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(startX3, startY3);
+    for (var x3 = 0; x3 <= 120; x3 += step3) {
+        var y3 = amplitude3 * Math.sin(frequency3 * (startY3+x3))-x3/2;
+        ctx.lineTo(x3 + startX3, startY3 - y3); // отнимаем y2 от startY2, так как координаты в canvas начинаются с верхнего левого угла
+    }
+    ctx.strokeStyle = 'blue';
+    ctx.lineWidth = 3;
+    ctx.stroke();
 
 };
 
