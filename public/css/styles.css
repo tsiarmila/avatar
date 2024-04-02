@@ -68,10 +68,11 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+  /* height: auto; */
   background-color: #f0f0f0; /* Цвет фона */
   color: #0056b3; /* Цвет текста */
-  padding: 17px; /* Внутренний отступ */
+  padding: 10px; /* Внутренний отступ */
   text-align: center; /* Выравнивание текста по центру */
     font-family: "Sacramento", cursive;
-    font-size: 30px;
+    font-size: 20px;
 }

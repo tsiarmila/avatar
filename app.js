@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
+// var favicon = require('serve-favicon');
 
 const app = express();
 
