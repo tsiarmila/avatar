@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const hairLengthSelect = document.getElementById('hairLengthSelect');
     const hairFormSelect = document.getElementById('hairFormSelect');
     const clothesColorSelect = document.getElementById('clothesColorSelect');
+    const addBowSelect = document.getElementById('addBowSelect');
+    const addBowtieSelect = document.getElementById('addBowtieSelect');
     const saveBtn = document.getElementById('saveBtn');
 
     function generateAvatar(ctx) {
@@ -20,14 +22,12 @@ document.addEventListener('DOMContentLoaded', function() {
         let hairLength = hairLengthSelect.value;
         const hairForm = hairFormSelect.value;
         const clothesColor = clothesColorSelect.value;
+        const bow = addBowSelect.value;
+        const bowtie = addBowtieSelect.value;
 
         if (hairForm === "curly") {
             hairLengthSelect.value = "short";
             hairLength = "short";
-        }
-        if (hairForm === "wavy") {
-            hairLengthSelect.value = "long";
-            hairLength = "long";
         }
 
         drawClothes(ctx, clothesColor);
@@ -40,12 +40,19 @@ document.addEventListener('DOMContentLoaded', function() {
         if (hairLength === 'short' && hairForm === 'curly') {
             drawHairSwirls(hairColor);
         }
-        if (hairLength === 'long' && hairForm === 'wavy') {
+        if (hairLength === 'short' && hairForm === 'wavy') {
             drawWavyHair(ctx, hairColor);
         }
-
-
-
+        if (hairLength === 'long' && hairForm === 'wavy') {
+            drawWavyHair(ctx, hairColor);
+            drawLongWavyHair(ctx, hairColor);
+        }
+        if (bow === 'bow') {
+            drawBow(ctx, clothesColor);
+        }
+        if (bowtie === 'bowtie') {
+            drawBowtie(ctx);
+        }
     }
 
     function drawClothes(ctx, clothesColor) {
@@ -90,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
       ctx.fill();
 
       // Draw eyes
-      ctx.fillStyle = '#000000'; // eye color
+      ctx.strokeStyle = 'black'; // eye color
       ctx.lineWidth = 3;
       ctx.lineCap = "round";
       ctx.beginPath();
@@ -101,7 +108,6 @@ document.addEventListener('DOMContentLoaded', function() {
       ctx.stroke();
 
       // Draw brows
-      ctx.fillStyle = '#000000';
       ctx.lineWidth = 1;
       ctx.lineCap = "round";
       ctx.beginPath();
@@ -230,77 +236,423 @@ document.addEventListener('DOMContentLoaded', function() {
             var swirlColor;
 
             switch (hairColor) {
-                case 'light':
+                case '#f4a460':
                     swirlColor = '#b86b30';
-                    // break;
-                case 'dark':
+                    break;
+                case '#8f715a':
+                    swirlColor = 'black';
+                    break;
+                case '#000000':
                     swirlColor = '#614d3d';
-                    // break;
-                case 'black':
-                    swirlColor = 'brown';
-                    // break;
+                    break;
                 default:
-                    swirlColor = '#614d3d'; // Если цвет волос не определен, используем коричневый цвет для завитушек
-            }
+                    swirlColor = '#614d3d';
+            };
             drawHairSwirl(swirl.x, swirl.y, length, angle, swirlColor);
         });
     };
 
     function drawWavyHair(ctx, hairColor) {
-    // Рисуем горизонтальную синусоиду
-    // var startX1 = 120;
-    // var startY1 = 60;
-    // var amplitude1 = 5;
-    // var frequency1 = 0.5;
-    // var step1 = 0.1;
-    //
-    // ctx.beginPath();
-    // ctx.moveTo(startX1, startY1);
-    // for (var x1 = startX1; x1 <= canvas.width; x1 += step1) {
-    //     var y1 = amplitude1 * Math.sin(frequency1 * (x1 - startX1));
-    //     ctx.lineTo(x1, y1 + startY1);
-    // }
-    // ctx.strokeStyle = 'black';
-    // ctx.lineWidth = 3;
-    // ctx.stroke();
 
-    // Рисуем вертикальную синусоиду
-    var startX2 = 120;
-    var startY2 = 60;
-    var amplitude2 = 5;
-    var frequency2 = 0.5;
-    var step2 = 0.1;
+        var swirlColor;
 
-    ctx.beginPath();
-    ctx.moveTo(startX2, startY2);
-    for (var y2 = startY2; y2 <= 80; y2 += step2) {
-        var x2 = amplitude2 * Math.sin(frequency2 * (y2 - startY2));
-        ctx.lineTo(x2 + startX2, y2);
+        switch (hairColor) {
+            case '#f4a460':
+                swirlColor = '#b86b30';
+                break;
+            case '#8f715a':
+                swirlColor = '#614d3d';
+                break;
+            case '#000000':
+                swirlColor = '#614d3d';
+                break;
+            default:
+                swirlColor = '#614d3d'; // Если цвет волос не определен, используем коричневый цвет для завитушек
+        };
+
+        // Рисуем вертикальную синусоиду
+        var startX2 = 120;
+        var startY2 = 60;
+        var amplitude2 = 5;
+        var frequency2 = 0.5;
+        var step2 = 0.1;
+
+        ctx.beginPath();
+        ctx.moveTo(startX2, startY2);
+        for (var y2 = startY2; y2 <= 80; y2 += step2) {
+            var x2 = amplitude2 * Math.sin(frequency2 * (y2 - startY2));
+            ctx.lineTo(x2 + startX2, y2);
+        }
+        ctx.strokeStyle = swirlColor;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Рисуем диагональную синусоиду3
+        var startX3 = 120;
+        var startY3 = 60;
+        var amplitude3 = 5;
+        var frequency3 = 0.35;
+        var step3 = 1;
+
+        ctx.beginPath();
+        ctx.moveTo(startX3, startY3);
+        for (var x3 = 0; x3 <= 60; x3 += step3) {
+            var y3 = amplitude3 * Math.sin(frequency3 * (startY3+x3))-x3/2.5;
+            ctx.lineTo(x3 + startX3, startY3 - y3); // отнимаем y2 от startY2, так как координаты в canvas начинаются с верхнего левого угла
+        }
+        ctx.strokeStyle = swirlColor;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Рисуем диагональную синусоиду4
+        var startX4 = 120;
+        var startY4 = 40;
+        var amplitude4 = 5;
+        var frequency4 = 0.35;
+        var step4 = 1;
+
+        ctx.beginPath();
+        ctx.moveTo(startX4, startY4);
+        for (var x4 = 0; x4 <= 60; x4 += step3) {
+            var y4 = amplitude3 * Math.sin(frequency4 * (startY4+x4))-x4/2.5;
+            ctx.lineTo(x4 + startX4, startY4 - y4);
+        }
+        ctx.strokeStyle = swirlColor;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Рисуем диагональную синусоиду5
+        var startX5 = 120;
+        var startY5 = 20;
+        var amplitude5 = 5;
+        var frequency5 = 0.35;
+        var step5 = 1;
+
+        ctx.beginPath();
+        ctx.moveTo(startX5, startY5);
+        for (var x5 = 0; x5 <= 50; x5 += step3) {
+            var y5 = amplitude5 * Math.sin(frequency5 * (startY5+x5))-x5/2.5;
+            ctx.lineTo(x5 + startX5, startY5 - y5);
+        }
+        ctx.strokeStyle = swirlColor;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Рисуем диагональную синусоиду3
+        var startX3 = 120;
+        var startY3 = 55;
+        var amplitude3 = 5;
+        var frequency3 = 0.35;
+        var step3 = 1;
+
+        ctx.beginPath();
+        ctx.moveTo(startX3, startY3);
+        for (var x3 = 0; x3 <= 98; x3 += step3) {
+            var y3 = amplitude3 * Math.sin(frequency3 * (startX3 - x3)) - x3 / 3; // изменяем направление движения по оси x и знак y3
+            ctx.lineTo(startX3 - x3, startY3 - y3);
+        }
+        ctx.strokeStyle = swirlColor;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Рисуем диагональную синусоиду4
+        var startX4 = 120;
+        var startY4 = 35;
+        var amplitude4 = 5;
+        var frequency4 = 0.35;
+        var step4 = 1;
+
+        ctx.beginPath();
+        ctx.moveTo(startX4, startY4);
+        for (var x4 = 0; x4 <= 95; x4 += step3) {
+            var y4 = amplitude4 * Math.sin(frequency4 * (startX4 - x4)) - x4 / 3; // изменяем направление движения по оси x и знак y4
+            ctx.lineTo(startX4 - x4, startY4 - y4);
+        }
+        ctx.strokeStyle = swirlColor;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Рисуем диагональную синусоиду5
+        var startX5 = 120;
+        var startY5 = 17;
+        var amplitude5 = 5;
+        var frequency5 = 0.35;
+        var step5 = 1;
+
+        ctx.beginPath();
+        ctx.moveTo(startX5, startY5);
+        for (var x5 = 0; x5 <= 88; x5 += step3) {
+            var y5 = amplitude5 * Math.sin(frequency5 * (startX5 - x5)) - x5 / 3.3; // изменяем направление движения по оси x и знак y5
+            ctx.lineTo(startX5 - x5, startY5 - y5);
+        }
+        ctx.strokeStyle = swirlColor;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+    };
+
+    function drawLongWavyHair(ctx, hairColor) {
+
+        var swirlColor;
+
+        switch (hairColor) {
+            case '#f4a460':
+                swirlColor = '#b86b30';
+                break;
+            case '#8f715a':
+                swirlColor = '#614d3d';
+                break;
+            case '#000000':
+                swirlColor = '#614d3d';
+                break;
+            default:
+                swirlColor = '#614d3d'; // Если цвет волос не определен, используем коричневый цвет для завитушек
+        };
+
+        // Рисуем вертикальную синусоиду6
+        var startX2 = 140;
+        var startY2 = 155;
+        var amplitude2 = 5;
+        var frequency2 = 0.5;
+        var step2 = 0.1;
+
+        ctx.beginPath();
+        ctx.moveTo(startX2, startY2);
+        for (var y2 = startY2; y2 <= 200; y2 += step2) {
+            var x2 = amplitude2 * Math.sin(frequency2 * (y2 - startY2));
+            ctx.lineTo(x2 + startX2, y2);
+        }
+        ctx.strokeStyle = swirlColor;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Рисуем вертикальную синусоиду6
+        var startX2 = 150;
+        var startY2 = 150;
+        var amplitude2 = 5;
+        var frequency2 = 0.35;
+        var step2 = 0.1;
+
+        ctx.beginPath();
+        ctx.moveTo(startX2, startY2);
+        for (var y2 = startY2; y2 <= 200; y2 += step2) {
+            var x2 = amplitude2 * Math.sin(frequency2 * (y2 - startY2));
+            ctx.lineTo(x2 + startX2, y2);
+        }
+        ctx.strokeStyle = swirlColor;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Рисуем вертикальную синусоиду6
+        var startX2 = 163;
+        var startY2 = 138;
+        var amplitude2 = 5;
+        var frequency2 = 0.5;
+        var step2 = 0.1;
+
+        ctx.beginPath();
+        ctx.moveTo(startX2, startY2);
+        for (var y2 = startY2; y2 <= 200; y2 += step2) {
+            var x2 = amplitude2 * Math.sin(frequency2 * (y2 - startY2));
+            ctx.lineTo(x2 + startX2, y2);
+        }
+        ctx.strokeStyle = swirlColor;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Рисуем вертикальную синусоиду6
+        var startX2 = 176;
+        var startY2 = 124;
+        var amplitude2 = 5;
+        var frequency2 = 0.35;
+        var step2 = 0.1;
+
+        ctx.beginPath();
+        ctx.moveTo(startX2, startY2);
+        for (var y2 = startY2; y2 <= 200; y2 += step2) {
+            var x2 = amplitude2 * Math.sin(frequency2 * (y2 - startY2));
+            ctx.lineTo(x2 + startX2, y2);
+        }
+        ctx.strokeStyle = swirlColor;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Рисуем вертикальную синусоиду6
+        var startX2 = 180;
+        var startY2 = 112;
+        var amplitude2 = 5;
+        var frequency2 = 0.35;
+        var step2 = 0.1;
+
+        ctx.beginPath();
+        ctx.moveTo(startX2, startY2);
+        for (var y2 = startY2; y2 <= 200; y2 += step2) {
+            var x2 = amplitude2 * Math.sin(frequency2 * (y2 - startY2));
+            ctx.lineTo(x2 + startX2, y2);
+        }
+        ctx.strokeStyle = swirlColor;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+
+        // Рисуем вертикальную синусоиду7
+        var startX2 = 67;
+        var startY2 = 156;
+        var amplitude2 = 5;
+        var frequency2 = 0.5;
+        var step2 = 0.1;
+
+        ctx.beginPath();
+        ctx.moveTo(startX2, startY2);
+        for (var y2 = startY2; y2 <= 200; y2 += step2) {
+            var x2 = amplitude2 * Math.sin(frequency2 * (y2 - startY2));
+            ctx.lineTo(x2 + startX2, y2);
+        }
+        ctx.strokeStyle = swirlColor;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Рисуем вертикальную синусоиду7
+        var startX2 = 57;
+        var startY2 = 153;
+        var amplitude2 = 5;
+        var frequency2 = 0.35;
+        var step2 = 0.1;
+
+        ctx.beginPath();
+        ctx.moveTo(startX2, startY2);
+        for (var y2 = startY2; y2 <= 200; y2 += step2) {
+            var x2 = amplitude2 * Math.sin(frequency2 * (y2 - startY2));
+            ctx.lineTo(x2 + startX2, y2);
+        }
+        ctx.strokeStyle = swirlColor;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Рисуем вертикальную синусоиду7
+        var startX2 = 47;
+        var startY2 = 149;
+        var amplitude2 = 5;
+        var frequency2 = 0.5;
+        var step2 = 0.1;
+
+        ctx.beginPath();
+        ctx.moveTo(startX2, startY2);
+        for (var y2 = startY2; y2 <= 200; y2 += step2) {
+            var x2 = amplitude2 * Math.sin(frequency2 * (y2 - startY2));
+            ctx.lineTo(x2 + startX2, y2);
+        }
+        ctx.strokeStyle = swirlColor;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Рисуем вертикальную синусоиду7
+        var startX2 = 40;
+        var startY2 = 142;
+        var amplitude2 = 5;
+        var frequency2 = 0.35;
+        var step2 = 0.1;
+
+        ctx.beginPath();
+        ctx.moveTo(startX2, startY2);
+        for (var y2 = startY2; y2 <= 200; y2 += step2) {
+            var x2 = amplitude2 * Math.sin(frequency2 * (y2 - startY2));
+            ctx.lineTo(x2 + startX2, y2);
+        }
+        ctx.strokeStyle = swirlColor;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Рисуем вертикальную синусоиду7
+        var startX2 = 27;
+        var startY2 = 128;
+        var amplitude2 = 5;
+        var frequency2 = 0.5;
+        var step2 = 0.1;
+
+        ctx.beginPath();
+        ctx.moveTo(startX2, startY2);
+        for (var y2 = startY2; y2 <= 200; y2 += step2) {
+            var x2 = amplitude2 * Math.sin(frequency2 * (y2 - startY2));
+            ctx.lineTo(x2 + startX2, y2);
+        }
+        ctx.strokeStyle = swirlColor;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Рисуем вертикальную синусоиду7
+        var startX2 = 21;
+        var startY2 = 115;
+        var amplitude2 = 5;
+        var frequency2 = 0.35;
+        var step2 = 0.1;
+
+        ctx.beginPath();
+        ctx.moveTo(startX2, startY2);
+        for (var y2 = startY2; y2 <= 200; y2 += step2) {
+            var x2 = amplitude2 * Math.sin(frequency2 * (startY2 - y2));
+            ctx.lineTo(x2 + startX2, y2);
+        }
+        ctx.strokeStyle = swirlColor;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+    };
+
+    function drawBow(ctx, clothesColor) {
+        // Рисуем верхнюю часть бантика
+        ctx.fillStyle = clothesColor;
+        var x = 50;
+        var y = 50;
+        var width = 50;
+        var height = 25;
+        var cornerRadius = 5;
+
+        ctx.beginPath();
+        ctx.moveTo(x-5, y);
+        ctx.lineTo(x + width / 2 - cornerRadius, y - height / 2);
+        ctx.arcTo(x + width / 2, y - height / 2, x + width / 2, y, cornerRadius);
+        ctx.lineTo(x + width / 2 -cornerRadius, y + height / 2);
+        ctx.closePath();
+        ctx.fill();
+
+        // Рисуем левую часть бантика
+        ctx.beginPath();
+        ctx.moveTo(x+5, y);
+        ctx.lineTo(x - width / 2 + cornerRadius, y - height / 2);
+        ctx.arcTo(x - width / 2, y - height / 2, x - width / 2, y, cornerRadius);
+        ctx.lineTo(x - width / 2, y + height / 2);
+        ctx.closePath();
+        ctx.fill();
+
     }
-    ctx.strokeStyle = 'blue'; // Измените цвет для вертикальной синусоиды
-    ctx.lineWidth = 3;
-    ctx.stroke();
 
-    // Рисуем диагональную синусоиду
-    var startX3 = 120;
-    var startY3 = 60;
-    var amplitude3 = 5;
-    var frequency3 = 0.5;
-    var step3 = 1;
+    function drawBowtie(ctx) {
+        // Рисуем верхнюю часть бантика
+        ctx.fillStyle = "black";
+        var x = 100;
+        var y = 170;
+        var width = 50;
+        var height = 25;
+        var cornerRadius = 5;
 
-    ctx.beginPath();
-    ctx.moveTo(startX3, startY3);
-    for (var x3 = 0; x3 <= 120; x3 += step3) {
-        var y3 = amplitude3 * Math.sin(frequency3 * (startY3+x3))-x3/2;
-        ctx.lineTo(x3 + startX3, startY3 - y3); // отнимаем y2 от startY2, так как координаты в canvas начинаются с верхнего левого угла
+        ctx.beginPath();
+        ctx.moveTo(x-5, y);
+        ctx.lineTo(x + width / 2 - cornerRadius, y - height / 2);
+        ctx.arcTo(x + width / 2, y - height / 2, x + width / 2, y, cornerRadius);
+        ctx.lineTo(x + width / 2 -cornerRadius, y + height / 2);
+        ctx.closePath();
+        ctx.fill();
+
+        // Рисуем левую часть бантика
+        ctx.beginPath();
+        ctx.moveTo(x+5, y);
+        ctx.lineTo(x - width / 2 + cornerRadius, y - height / 2);
+        ctx.arcTo(x - width / 2, y - height / 2, x - width / 2, y, cornerRadius);
+        ctx.lineTo(x - width / 2, y + height / 2);
+        ctx.closePath();
+        ctx.fill();
+
     }
-    ctx.strokeStyle = 'blue';
-    ctx.lineWidth = 3;
-    ctx.stroke();
-
-};
-
-
 
 
     function saveAvatar() {
@@ -338,3 +690,38 @@ document.addEventListener('DOMContentLoaded', function() {
         saveAvatar();
     });
 });
+
+
+// Рисуем горизонтальную синусоиду
+// var startX1 = 120;
+// var startY1 = 60;
+// var amplitude1 = 5;
+// var frequency1 = 0.5;
+// var step1 = 0.1;
+//
+// ctx.beginPath();
+// ctx.moveTo(startX1, startY1);
+// for (var x1 = startX1; x1 <= canvas.width; x1 += step1) {
+//     var y1 = amplitude1 * Math.sin(frequency1 * (x1 - startX1));
+//     ctx.lineTo(x1, y1 + startY1);
+// }
+// ctx.strokeStyle = 'black';
+// ctx.lineWidth = 3;
+// ctx.stroke();
+
+// Рисуем диагональную синусоиду6
+// var startX6 = 120;
+// var startY6 = 60;
+// var amplitude6 = 5;
+// var frequency6 = 0.5;
+// var step6 = 1;
+//
+// ctx.beginPath();
+// ctx.moveTo(startX6, startY6);
+// for (var x6 = 0; x6 <= 60; x6 += step6) {
+//     var y6 = amplitude6 * Math.sin(frequency6 * (startY6+x6))-x6/2;
+//     ctx.lineTo(x6 + startX6, startY6 - y6); // отнимаем y2 от startY2, так как координаты в canvas начинаются с верхнего левого угла
+// }
+// ctx.strokeStyle = '#614d3d';
+// ctx.lineWidth = 3;
+// ctx.stroke();
