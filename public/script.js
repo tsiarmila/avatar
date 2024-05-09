@@ -393,7 +393,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function drawLongWavyHair(ctx, hairColor) {
 
         var swirlColor;
-
         switch (hairColor) {
             case '#f4a460':
                 swirlColor = '#b86b30';
@@ -417,7 +416,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         ctx.beginPath();
         ctx.moveTo(startX2, startY2);
-        for (var y2 = startY2; y2 <= 200; y2 += step2) {
+        for (var y2 = startY2; y2 <= 170; y2 += step2) {
             var x2 = amplitude2 * Math.sin(frequency2 * (y2 - startY2));
             ctx.lineTo(x2 + startX2, y2);
         }
@@ -444,7 +443,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Рисуем вертикальную синусоиду6
         var startX2 = 163;
-        var startY2 = 138;
+        var startY2 = 140;
         var amplitude2 = 5;
         var frequency2 = 0.5;
         var step2 = 0.1;
@@ -478,7 +477,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Рисуем вертикальную синусоиду6
         var startX2 = 180;
-        var startY2 = 112;
+        var startY2 = 102;
         var amplitude2 = 5;
         var frequency2 = 0.35;
         var step2 = 0.1;
@@ -495,21 +494,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
         // Рисуем вертикальную синусоиду7
-        var startX2 = 67;
-        var startY2 = 156;
-        var amplitude2 = 5;
-        var frequency2 = 0.5;
-        var step2 = 0.1;
-
-        ctx.beginPath();
-        ctx.moveTo(startX2, startY2);
-        for (var y2 = startY2; y2 <= 200; y2 += step2) {
-            var x2 = amplitude2 * Math.sin(frequency2 * (y2 - startY2));
-            ctx.lineTo(x2 + startX2, y2);
-        }
-        ctx.strokeStyle = swirlColor;
-        ctx.lineWidth = 3;
-        ctx.stroke();
+        // var startX2 = 67;
+        // var startY2 = 156;
+        // var amplitude2 = 5;
+        // var frequency2 = 0.5;
+        // var step2 = 0.1;
+        //
+        // ctx.beginPath();
+        // ctx.moveTo(startX2, startY2);
+        // for (var y2 = startY2; y2 <= 170; y2 += step2) {
+        //     var x2 = amplitude2 * Math.sin(frequency2 * (y2 - startY2));
+        //     ctx.lineTo(x2 + startX2, y2);
+        // }
+        // ctx.strokeStyle = swirlColor;
+        // ctx.lineWidth = 3;
+        // ctx.stroke();
 
         // Рисуем вертикальную синусоиду7
         var startX2 = 57;
@@ -520,7 +519,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         ctx.beginPath();
         ctx.moveTo(startX2, startY2);
-        for (var y2 = startY2; y2 <= 200; y2 += step2) {
+        for (var y2 = startY2; y2 <= 175; y2 += step2) {
             var x2 = amplitude2 * Math.sin(frequency2 * (y2 - startY2));
             ctx.lineTo(x2 + startX2, y2);
         }
@@ -563,8 +562,8 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.stroke();
 
         // Рисуем вертикальную синусоиду7
-        var startX2 = 27;
-        var startY2 = 128;
+        var startX2 = 32;
+        var startY2 = 134;
         var amplitude2 = 5;
         var frequency2 = 0.5;
         var step2 = 0.1;
@@ -572,7 +571,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.beginPath();
         ctx.moveTo(startX2, startY2);
         for (var y2 = startY2; y2 <= 200; y2 += step2) {
-            var x2 = amplitude2 * Math.sin(frequency2 * (y2 - startY2));
+            var x2 = amplitude2 * Math.sin(frequency2 * (startY2 - y2));
             ctx.lineTo(x2 + startX2, y2);
         }
         ctx.strokeStyle = swirlColor;
@@ -580,8 +579,8 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.stroke();
 
         // Рисуем вертикальную синусоиду7
-        var startX2 = 21;
-        var startY2 = 115;
+        var startX2 = 20;
+        var startY2 = 102;
         var amplitude2 = 5;
         var frequency2 = 0.35;
         var step2 = 0.1;
